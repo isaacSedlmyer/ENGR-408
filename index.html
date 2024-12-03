@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Augmented Reality Arrows</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        #videoBackground {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1; 
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1; 
+        }
+        .button-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: rgba(0, 123, 255, 0.8);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button-container button:hover {
+            background-color: rgba(0, 86, 179, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <script src="Front Page_BE.js"></script>
+    <video id="videoBackground" autoplay muted playsinline></video>
+    <div class="button-container">
+        <button id="button1">Maker Space</button>
+        <button id="button2">Wood Shop</button>
+        <button id="button3">EE IOT</button>
+        <button id="button4">Metal Shop</button>
+    </div>
+    <script>
+        const video = document.getElementById('videoBackground');
+
+        navigator.mediaDevices.getUserMedia({
+            video: { facingMode: "environment" }, 
+            audio: false 
+        })
+        .then((stream) => {
+            video.srcObject = stream;
+        })
+        .catch((error) => {
+            console.error("Error accessing the camera:", error);
+            alert("Unable to access the camera. Please check permissions and Safari settings.");
+        });
+    </script>
+</body>
+</html>
